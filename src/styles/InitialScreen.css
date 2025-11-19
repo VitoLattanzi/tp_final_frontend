@@ -1,0 +1,134 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #1a1a1f; /* Fondo oscuro elegante */
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.auth-conteiner {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+/* ===== HEADER ===== */
+.auth-header {
+  text-align: center;
+  margin-bottom: 25px;
+
+}
+
+.auth-header p {
+  font-size: 2.5rem;
+  letter-spacing: 0.5px;
+  color: #c8b5ff; /* violeta suave */
+  font-weight: 600;
+}
+
+/* ===== CARD ===== */
+.auth-card {
+  background: #23232b;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 0 40px rgba(147, 88, 255, 0.25); /* glow violeta */
+}
+
+/* ===== TABS ===== */
+.auth-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px 0;
+  background: #2f2f39;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #bda7ff;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  margin: 0 4px;
+}
+
+.auth-tab:hover {
+  background: #3c3c46;
+}
+
+.auth-tab.active {
+  background: #7a4dff; /* violeta principal */
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(122, 77, 255, 0.5);
+}
+
+/* ===== CONTENIDO (login/register) ===== */
+.auth-content {
+  margin-top: 10px;
+}
+
+/* ===== FORMS (por si los usás adentro) ===== */
+.auth-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-content input {
+  background: #2b2b33;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #3a3a42;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border 0.15s ease;
+}
+
+.auth-content input:focus {
+  border-color: #8d62ff;
+  outline: none;
+}
+
+/* ===== BOTONES ===== */
+.auth-btn {
+  padding: 12px;
+  background: #7a4dff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.auth-btn:hover {
+  background: #6c41e6;
+  transform: translateY(-1px);
+}
+
+.auth-btn:active {
+  transform: translateY(0px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 20px;
+  }
+  .auth-header p {
+    font-size: 2rem;
+  }
+}

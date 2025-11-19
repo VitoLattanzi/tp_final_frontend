@@ -1,0 +1,123 @@
+/* =====REGISTER Y LOGIN) ===== */
+.auth-content form,
+.Form-login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cada campo */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Label  */
+.form-field label {
+  font-size: 0.9rem;
+  color: #e2ddff;
+}
+
+/* Inputs */
+.form-field input {
+  width: 100%;
+  background: #2b2b33;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #3a3a42;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: border 0.15s ease, background 0.15s ease;
+}
+
+.form-field input::placeholder {
+  color: #767689;
+}
+
+.form-field input:focus {
+  border-color: #8d62ff;
+  background: #32323c;
+  outline: none;
+}
+
+/* contraseña y ojo*/
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  padding-right: 40px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.password-toggle-btn:hover {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.password-toggle-btn.is-active {
+  opacity: 1;
+}
+
+.password-toggle-icon {
+  width: 18px;
+  height: 18px;
+  fill: #bda7ff;
+}
+
+/* Mensajes error o bien */
+.form-message {
+  font-size: 0.85rem;
+}
+
+.form-message--error {
+  color: #ff6b6b;
+}
+
+.form-message--success {
+  color: #66d38f;
+}
+
+/* ===== BOTONES login y register ===== */
+.auth-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #7a4dff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 10px #7a4dff73;
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  background: #6c41e6;
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px #7a4dffb3;
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: 0 0 6px #7a4dff4d;
+}

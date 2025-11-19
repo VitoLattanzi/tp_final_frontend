@@ -4,8 +4,13 @@ import InitialScreen from "./Screens/InitialScreen/InitialScreen";
 export default function App() {
   return (
     <Routes>
-      <Route path="/auth" element={<InitialScreen />} />
-
+      <Route path="/" element={<InitialScreen />} />
+      {/* 
+      <Route path="/" element={< />} />
+      <Route path="/" element={< />} />
+      <Route path="/" element={< />} />
+      <Route path="/" element={< />} />
+      */}
     </Routes>
   );
 }
