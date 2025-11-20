@@ -1,44 +1,45 @@
-import React, { useEffect } from 'react'
-import useFetch from '../../hooks/useFetch' 
-import { getWorkspaces } from '../../services/workspaceService' 
-import { Link } from 'react-router-dom';
+import "../../styles/HomeScreen.css";import { useState } from 'react';
+import NavBar from './NavBar/NavBar.jsx';
+import DashboardScreen from '../DashboardScreen/DashboardScreen.jsx';
+import AddHabitScreen from '../AddHabbitScreen/AddHabitScreen.jsx'; 
 
 
 const HomeScreen = () => {
-  const {sendRequest, response, loading, error} = useFetch()
+  const [currentPage, setCurrentPage] = useState('dashboard');
+  const token = localStorage.getItem('auth_token');
+  const isAuthenticated = !!token;
+  const userName = localStorage.getItem('userName') || 'Usuario';
 
-  useEffect( 
-    ()=>{
-      sendRequest(
-        () => getWorkspaces()
-      )
-    },
-    []
-  )
-  console.log(response, loading, error)
+  const renderPage = () => {
+
+    switch (currentPage) {
+      case 'dashboard':
+        return <DashboardScreen />;
+      case 'add-habit':
+        return <AddHabitScreen />;
+    /*case 'daily-entries':
+        return <DailyEntriesScreen />;
+      case 'stats':
+        return <StatsScreen />;
+      case 'settings':
+        return <SettingsScreen />;
+      default:'dashboard'; */
+    }
+  };
+
+  if (!isAuthenticated) return null;
+
   return (
-    <div>
-      <h1>lista de espacio de trabajos</h1>
-      {
-        loading  
-        ? <span>cargando...</span>
-        : <div> 
-          { response && response.data.workspaces.map(
-            (workspace) => {
-              return (
-                <div>
-                  <h1>los works</h1>
-                  <h2>{workspace.workspace_name}</h2>
-                  <Link to={'/workspace/' + workspace.workspace_id}>Abrir workspace</Link>
-                </div>
-              )
-            }
-          )
-          } 
-          </div>
-      }
+    <div className="home-layout">
+      <NavBar
+        currentPage={currentPage}
+        onNavigate={setCurrentPage}
+        userName={userName}
+        isAuthenticated={isAuthenticated}
+      />
+      <main className="home-content">{renderPage()}</main>
     </div>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;

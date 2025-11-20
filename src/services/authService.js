@@ -34,34 +34,24 @@ export async function register (username, email, password){
     }
 }
 
-export async function login (email, password){
-    try{
-        const body = {
-            email, 
-            password
-        } 
-    
-        const response_http = await fetch(
-                ENVIRONMENT.URL_APP_API +'/api/auth/login',
-            {
-                method: 'POST',
-                headers: {
-                    //Indica a mi servidor que voy a enviar un JSON por body
-                    "Content-Type": 'application/json'
-                },
-                //Transformo el objeto de JS a JSON (texto)
-                body: JSON.stringify(body)
-            }
-        )
-        
-        const response = await response_http.json()
-    
-        return response
+export async function login(email, password) {
+  try {
+    const body = { email, password };
 
-    }
-    
-    catch(error){
-        console.error('Error al registrar:', error)
-        throw new Error('Error interno del servidor')
-    }
+    const response_http = await fetch(
+      ENVIRONMENT.URL_APP_API + '/api/auth/login',
+      {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }
+    );
+
+    const response = await response_http.json();
+    return response;
+
+  } catch (error) {
+    console.error('Error al loguear:', error);
+    throw new Error('Error interno del servidor');
+  }
 }
