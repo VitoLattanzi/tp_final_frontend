@@ -19,7 +19,7 @@
 
 /* Contenedor principal: SIEMPRE arriba */
 .nav {
-  position: sticky; /* si preferís fijo: fixed */
+  position: sticky; 
   top: 0;
   z-index: 100;
   background-color: var(--nav-bg);
@@ -28,14 +28,14 @@
 }
 
 .nav-inner {
-  max-width: 1120px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 16px;
   height: 64px;
   display: flex;
-  align-items: center;
+  align-items: normal;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
 }
 
 /* Logo / marca */
@@ -225,7 +225,7 @@ background-color: var(--nav-primary);
 
 /* RESPONSIVE */
 
-@media (max-width: 768px) {
+@media (max-width: 830px) {
   .nav-inner {
     height: 56px;
   }

@@ -2,6 +2,7 @@ import "../../styles/HomeScreen.css";import { useState } from 'react';
 import NavBar from './NavBar/NavBar.jsx';
 import DashboardScreen from '../DashboardScreen/DashboardScreen.jsx';
 import AddHabitScreen from '../AddHabbitScreen/AddHabitScreen.jsx'; 
+import DailyEntriesScreen from '../DailyEntriesScreen/DailyEntriesScreen.jsx';
 
 
 const HomeScreen = () => {
@@ -17,9 +18,9 @@ const HomeScreen = () => {
         return <DashboardScreen />;
       case 'add-habit':
         return <AddHabitScreen />;
-    /*case 'daily-entries':
+      case 'daily-entries':
         return <DailyEntriesScreen />;
-      case 'stats':
+      /*case 'stats':
         return <StatsScreen />;
       case 'settings':
         return <SettingsScreen />;

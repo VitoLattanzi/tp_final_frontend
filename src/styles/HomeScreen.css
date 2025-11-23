@@ -1,9 +1,9 @@
 /* ====== Layout general ====== */
 
 .home-layout {
-  min-height: 100vh;
+  min-height: 100vh; 
   width: 100%;
-  background-color: #f3f4f6; /* gris claro suave */
+  background-color: #f3f4f6;
   display: flex;
   flex-direction: column;
 }
@@ -11,14 +11,11 @@
 /* El contenido se coloca debajo del navbar */
 .home-content {
   flex: 1;
-  padding: 24px 16px;
-  max-width: 1200px;
+  padding: 0;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
-
-/* ====== Tipografía global del Home ====== */
 
 .home-content h1 {
   font-size: 24px;
@@ -33,11 +30,9 @@
   margin-bottom: 12px;
 }
 
-/* ====== Responsivo ====== */
-
 @media (min-width: 1024px) {
   .home-content {
-    padding: 32px 24px;
+    padding: 0;
   }
 
   .home-content h1 {

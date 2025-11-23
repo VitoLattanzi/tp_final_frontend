@@ -1,103 +1,157 @@
 import ENVIRONMENT from "../config/environment";
 
 function getAuthHeaders(extra = {}) {
-    const token = localStorage.getItem("auth_token");
+  const token = localStorage.getItem("auth_token");
 
-    if (!token) {
-        throw new Error("No hay token de autenticación. Iniciá sesión nuevamente.");
-    }
-    return {
-        ...extra,
-        Authorization: `Bearer ${token}`,
-    };
+  if (!token) {
+    throw new Error("No hay token de autenticación. Iniciá sesión nuevamente.");
+  }
+
+  return {
+    ...extra,
+    Authorization: `Bearer ${token}`,
+  };
 }
 
-// GET /api/habits
+/* GET HABITS  */
 export async function getHabits() {
-    try {
-        const response_http = await fetch(
-            ENVIRONMENT.URL_APP_API + "/api/habits",
-            {
-                method: "GET",
-                headers: getAuthHeaders(),
-            }
-        );
-        if (!response_http.ok) {
-            throw new Error("Error al obtener la lista de hábitos");
-        }
+  try {
+    const response_http = await fetch(
+      ENVIRONMENT.URL_APP_API + "/api/habits",
+      {
+        method: "GET",
+        headers: getAuthHeaders(),
+      }
+    );
 
-        const response = await response_http.json();
-        // el back devuelve { ok: true, habits: ..., etc}
-        return response;
-    } catch (error) {
-        console.error("Error al obtener hábitos:", error);
-        throw new Error(error.message || "Error interno del servidor");
+    const response = await response_http.json();
+
+    if (!response_http.ok || !response.ok) {
+      throw new Error(response?.message || "Error al obtener hábitos");
     }
+
+    return response;
+  } catch (error) {
+    console.error("Error al obtener hábitos:", error);
+    throw error;
+  }
 }
 
-// POST /api/habits
+/* CREATE HABIT */
 export async function createHabit(habitData) {
-    try {
-        const response_http = await fetch(
-            ENVIRONMENT.URL_APP_API + "/api/habits",
-            {
-                method: "POST",
-                headers: getAuthHeaders({
-                    "Content-Type": "application/json",
-                }),
-                body: JSON.stringify(habitData),
-            }
-        );
+  try {
+    const response_http = await fetch(
+      ENVIRONMENT.URL_APP_API + "/api/habits",
+      {
+        method: "POST",
+        headers: getAuthHeaders({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(habitData),
+      }
+    );
 
-        const response = await response_http.json();
+    const response = await response_http.json();
 
-        if (!response_http.ok || !response.ok) {
- 
-        const message =
-            response?.details?.[0]?.message ||
-            response?.message ||
-            "Error al crear el hábito";
-            throw new Error(message);
-        }
-
-        // { ok: true, habit: {...} }
-        return response;
-    } catch (error) {
-        console.error("Error al crear hábito:", error);
-        throw new Error(error.message || "Error interno del servidor");
+    if (!response_http.ok || !response.ok) {
+      const message =
+        response?.details?.[0]?.message ||
+        response?.message ||
+        "Error al crear el hábito";
+      throw new Error(message);
     }
+
+    return response;
+  } catch (error) {
+    console.error("Error al crear hábito:", error);
+    throw error;
+  }
 }
 
-// POST /api/habits/:habitId/entries
-export async function createHabitEntry(habitId, { date, value }) {
-    try {
-        const body = { date, value };
+/* DELETE HABIT */
+export async function deleteHabit(habitId) {
+  try {
+    const response_http = await fetch(
+      ENVIRONMENT.URL_APP_API + `/api/habits/${habitId}`,
+      {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+      }
+    );
 
-        const response_http = await fetch(
-            ENVIRONMENT.URL_APP_API + `/api/habits/${habitId}/entries`,
-            {
-                method: "POST",
-                headers: getAuthHeaders({
-                    "Content-Type": "application/json",
-                }),
-                body: JSON.stringify(body),
-            }
-        );
+    const response = await response_http.json();
 
-        const response = await response_http.json();
-
-        if (!response_http.ok || !response.ok) {
-            const message =
-                response?.details?.[0]?.message ||
-                response?.message ||
-                "Error al registrar la entrada del hábito";
-            throw new Error(message);
-        }
-
-        // { ok: true, entry: {...} }
-        return response;
-    } catch (error) {
-        console.error("Error al crear entrada de hábito:", error);
-        throw new Error(error.message || "Error interno del servidor");
+    if (!response_http.ok || !response.ok) {
+      throw new Error(response?.message || "Error al eliminar hábito");
     }
+
+    return response;
+  } catch (error) {
+    console.error("Error al eliminar hábito:", error);
+    throw error;
+  }
+}
+
+/* CREATE ENTRY*/
+export async function createHabitEntry(habitId, { date, value }) {
+  try {
+    const body = { date, value };
+
+    const response_http = await fetch(
+      ENVIRONMENT.URL_APP_API + `/api/habits/${habitId}/entries`,
+      {
+        method: "POST",
+        headers: getAuthHeaders({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(body),
+      }
+    );
+
+    const response = await response_http.json();
+
+    if (!response_http.ok || !response.ok) {
+      const message =
+        response?.details?.[0]?.message ||
+        response?.message ||
+        "Error al registrar la entrada del hábito";
+      throw new Error(message);
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Error al crear entrada de hábito:", error);
+    throw error;
+  }
+}
+
+/* GET 7-DAY HISTORIAL */
+export async function getHabitHistory(habitId, days = 7) {
+  try {
+    const url =
+      ENVIRONMENT.URL_APP_API +
+      `/api/entries/${habitId}/history?days=${days}`;
+
+    const response_http = await fetch(url, {
+      method: "GET",
+      headers: getAuthHeaders(),
+    });
+
+    const response = await response_http.json();
+
+    if (!response_http.ok || !response.ok) {
+      throw new Error(response?.message || "Error al obtener historial");
+    }
+
+    // YA VIENE COMO STRING "YYYY-MM-DD"
+    const normalized = response.days.map((d) => ({
+      date: d.date,
+      status: d.status,
+    }));
+
+    return { habitId: response.habitId, days: normalized };
+  } catch (error) {
+    console.error("Error al obtener historial:", error);
+    throw error;
+  }
 }

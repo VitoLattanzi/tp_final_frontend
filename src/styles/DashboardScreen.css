@@ -113,3 +113,129 @@
     font-size: 26px;
   }
 }
+
+.habit-delete-btn {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.habit-delete-btn:hover {
+  background-color: #fee2e2;
+  transform: translateY(-1px);
+}
+
+.habit-delete-icon {
+  width: 16px;
+  height: 16px;
+  color: #b91c1c;
+}
+
+
+.dashboard-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.dashboard-confirm-dialog {
+  background-color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+}
+
+.dashboard-confirm-title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dashboard-confirm-text {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.dashboard-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.dashboard-confirm-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.dashboard-confirm-btn--secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.dashboard-confirm-btn--secondary:hover {
+  background-color: #d1d5db;
+}
+
+.dashboard-confirm-btn--danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.dashboard-confirm-btn--danger:hover {
+  background-color: #dc2626;
+}
+
+.dashboard-confirm-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.habit-history {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.habit-history-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+  background-color: #f3f4f6;
+}
+
+/* meta alcanzada */
+.habit-history-dot--full {
+  background-color: #22c55e;
+  border-color: #16a34a;
+}
+
+/* no llegó a la meta */
+.habit-history-dot--partial {
+  background-color: #facc15;
+  border-color: #eab308;
+}
+
+/* nada registrado */
+.habit-history-dot--none {
+  background-color: #ef4444;
+  border-color: #dc2626;
+}
