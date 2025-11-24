@@ -1,7 +1,5 @@
 /* frontend/src/services/habitService.js */
 
-// 1. LEEMOS LA VARIABLE DIRECTAMENTE
-// Si no existe (undefined), usamos localhost como respaldo de seguridad.
 const API_URL = import.meta.env.VITE_APP_API_URL || "http://localhost:8080";
 
 /* HELPER PARA TOKEN */
