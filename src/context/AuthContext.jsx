@@ -15,7 +15,6 @@ const AuthContextProvider = ({children}) => {
     //ESTADO: Marca si esta o no logueado el usuario
     const [ isLogged, setIsLogged ] = useState( Boolean(localStorage.getItem('auth_token')) )
 
-
     //Una vez se monte el componente decodificar el token y guardar los datos de sesion
     useEffect(
         () => {
@@ -54,8 +53,6 @@ const AuthContextProvider = ({children}) => {
         navigate('/home')
     
     }
-
-
 
     return <AuthContext.Provider
         value={{

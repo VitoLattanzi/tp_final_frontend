@@ -4,7 +4,6 @@ import DashboardScreen from '../DashboardScreen/DashboardScreen.jsx';
 import AddHabitScreen from '../AddHabbitScreen/AddHabitScreen.jsx'; 
 import DailyEntriesScreen from '../DailyEntriesScreen/DailyEntriesScreen.jsx';
 
-
 const HomeScreen = () => {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const token = localStorage.getItem('auth_token');
@@ -20,11 +19,8 @@ const HomeScreen = () => {
         return <AddHabitScreen />;
       case 'daily-entries':
         return <DailyEntriesScreen />;
-      /*case 'stats':
-        return <StatsScreen />;
-      case 'settings':
-        return <SettingsScreen />;
-      default:'dashboard'; */
+      default:
+        return <DashboardScreen />;
     }
   };
 

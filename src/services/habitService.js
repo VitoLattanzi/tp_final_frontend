@@ -1,5 +1,3 @@
-/* frontend/src/services/habitService.js */
-
 const API_URL = import.meta.env.VITE_APP_API_URL || "http://localhost:8080";
 
 /* HELPER PARA TOKEN */

@@ -104,15 +104,6 @@
   cursor: default;
 }
 
-@media (min-width: 1024px) {
-  .dashboard {
-    padding: 32px 24px;
-  }
-
-  .dashboard-title {
-    font-size: 26px;
-  }
-}
 
 .habit-delete-btn {
   border: none;
@@ -222,20 +213,28 @@
   background-color: #f3f4f6;
 }
 
-/* meta alcanzada */
 .habit-history-dot--full {
   background-color: #22c55e;
   border-color: #16a34a;
 }
 
-/* no llegó a la meta */
 .habit-history-dot--partial {
   background-color: #facc15;
   border-color: #eab308;
 }
 
-/* nada registrado */
 .habit-history-dot--none {
   background-color: #ef4444;
   border-color: #dc2626;
+}
+
+
+@media (min-width: 1024px) {
+  .dashboard {
+    padding: 32px 24px;
+  }
+
+  .dashboard-title {
+    font-size: 26px;
+  }
 }

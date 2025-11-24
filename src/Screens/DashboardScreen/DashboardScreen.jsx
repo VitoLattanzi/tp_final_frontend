@@ -24,7 +24,7 @@ export default function DashboardScreen() {
 
   const today = todayISO();
 
-  /* --- 1. CARGAR HÁBITOS --- */
+  /* primero cargar los habitos*/
   async function loadHabits() {
     try {
       setLoading(true);
@@ -38,7 +38,7 @@ export default function DashboardScreen() {
     }
   }
 
-  /* --- 2. CARGAR HISTORIAL (PELOTITAS) --- */
+  /* Segundo cargar el historial de los habitos (pelotitas) */
   async function loadHistory() {
     try {
       const updated = [];
@@ -52,7 +52,7 @@ export default function DashboardScreen() {
     }
   }
 
-  /* --- 3. REGISTRAR DÍA --- */
+  /* Tercero registrar la entrada */
   async function handleAddToday(habit) {
     try {
       
@@ -68,10 +68,10 @@ export default function DashboardScreen() {
     } catch (error) {
       console.error("Error registrando entrada:", error);
       alert(error.message);
-      setSubmittingId(null); // Si falló "Guardando"
+      setSubmittingId(null); // Si falló q diga "Guardando"
     }
   }
-  /* --- 4. ELIMINAR HÁBITO --- */
+  /* Cuarto borrar el habito y x ende su historial */
   async function handleDeleteHabit() {
     if (!confirmHabit) return;
     try {
@@ -90,12 +90,10 @@ export default function DashboardScreen() {
   // Efectos de carga
   useEffect(() => {
     loadHabits();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (habits.length > 0) loadHistory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [habits.length]);
 
   // Renderizado de las pelotitas

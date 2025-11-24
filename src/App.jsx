@@ -8,11 +8,6 @@ export default function App() {
     <Routes>
       <Route path="/" element={<InitialScreen />} />
       <Route path="/home" element={< HomeScreen/>} />
-        {/* 
-        <Route path="/" element={< />} />
-        <Route path="/" element={< />} />
-        <Route path="/" element={< />} />
-        */}
     </Routes>
   );
 }

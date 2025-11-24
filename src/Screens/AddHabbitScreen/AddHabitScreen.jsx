@@ -8,7 +8,7 @@ const AddHabitScreen = ({ onHabitCreated }) => {
     type: "numeric",
     unit: "",
     dailyGoal: "",
-    color: "#6366f1",
+    color: "#000000ff",
   });
 
   const [submitting, setSubmitting] = useState(false);

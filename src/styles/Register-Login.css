@@ -1,4 +1,4 @@
-/* =====REGISTER Y LOGIN) ===== */
+/* =====REGISTER Y LOGIN ===== */
 .auth-content form,
 .Form-login-container form {
   display: flex;
@@ -94,7 +94,7 @@
   color: #66d38f;
 }
 
-/* ===== BOTONES login y register ===== */
+/* Boton de enviar en login o registro*/
 .auth-submit-btn {
   width: 100%;
   padding: 12px;

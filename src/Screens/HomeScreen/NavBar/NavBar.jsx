@@ -19,8 +19,6 @@ export default function NavBar({ currentPage, onNavigate, userName, isAuthentica
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'add-habit', label: 'Add Habit', icon: Plus },
     { id: 'daily-entries', label: 'Daily Entries', icon: CheckSquare },
-    { id: 'stats', label: 'Stats', icon: BarChart3 },
-    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   const userInitial =

@@ -4,16 +4,16 @@ import { register } from '../../../services/authService'
 import useFetch from '../../../hooks/useFetch'
 import "../../../styles/Register-Login.css"
 
-
 const RegisterScreen = () => {
-
     //Guardamos los campos que tendra nuestro form
     const REGISTER_FORM_FIELDS = {
         USERNAME: 'username',
         EMAIL: 'email',
         PASSWORD: 'password'
     }
+    
     const [showPassword, setShowPassword] = useState(false);
+
     //Que valor tendra inicialmente el estado de formulario
     const initial_form_state = {
         [REGISTER_FORM_FIELDS.USERNAME]: '',
@@ -37,7 +37,6 @@ const RegisterScreen = () => {
         )
     }
 
-    
     //Alternativa, usar react hook forms / React formik
     const {
         form_state, 
@@ -48,7 +47,6 @@ const RegisterScreen = () => {
         initial_form_state, 
         onRegister
     )
-    
     
     return (
         <div>
