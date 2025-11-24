@@ -5,8 +5,9 @@ import {
   deleteHabit,
   getHabitHistory,
 } from "../../services/habitService";
-import "../../styles/DashboardScreen.css"; 
-import { Trash2 } from "lucide-react";
+import EditHabitModal from "./EditHabitModal/EditHabitModal.jsx"; 
+import "../../styles/DashboardScreen.css";
+import { Trash2, Edit2 } from "lucide-react"; 
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
 
@@ -16,12 +17,14 @@ export default function DashboardScreen() {
   const [error, setError] = useState("");
   const [submittingId, setSubmittingId] = useState(null);
 
-  const [confirmHabit, setConfirmHabit] = useState(null);
+  // Estados para los Modales
+  const [confirmHabit, setConfirmHabit] = useState(null); // Para borrar
+  const [editingHabit, setEditingHabit] = useState(null); // Para editar (NUEVO)
   const [deleting, setDeleting] = useState(false);
 
   const today = todayISO();
 
-  /* CARGAR HÁBITOS */
+  /* --- 1. CARGAR HÁBITOS --- */
   async function loadHabits() {
     try {
       setLoading(true);
@@ -35,7 +38,7 @@ export default function DashboardScreen() {
     }
   }
 
-  /* CARGAR HISTORIAL */
+  /* --- 2. CARGAR HISTORIAL (PELOTITAS) --- */
   async function loadHistory() {
     try {
       const updated = [];
@@ -45,30 +48,30 @@ export default function DashboardScreen() {
       }
       setHabits(updated);
     } catch (err) {
-      console.error("Error cargando historial de hábito:", err);
+      console.error("Error cargando historial:", err);
     }
   }
 
-  /* REGISTRAR ENTRADA */
+  /* --- 3. REGISTRAR DÍA --- */
   async function handleAddToday(habit) {
     try {
+      
       setSubmittingId(habit._id);
+      
       const isBool = habit.type === "boolean";
       const value = isBool ? 1 : Number(habit.dailyGoal);
-
+      
       await createHabitEntry(habit._id, { date: today, value });
+      
+      window.location.reload();
 
-      await loadHabits();
-      await loadHistory();
     } catch (error) {
       console.error("Error registrando entrada:", error);
       alert(error.message);
-    } finally {
-      setSubmittingId(null);
+      setSubmittingId(null); // Si falló "Guardando"
     }
   }
-
-  /* ELIMINAR HÁBITO */
+  /* --- 4. ELIMINAR HÁBITO --- */
   async function handleDeleteHabit() {
     if (!confirmHabit) return;
     try {
@@ -77,21 +80,25 @@ export default function DashboardScreen() {
       setConfirmHabit(null);
       await loadHabits();
     } catch (error) {
-      console.error("Error eliminando hábito:", error);
+      console.error("Error eliminando:", error);
       alert(error.message);
     } finally {
       setDeleting(false);
     }
   }
 
+  // Efectos de carga
   useEffect(() => {
     loadHabits();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (habits.length > 0) loadHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [habits.length]);
 
+  // Renderizado de las pelotitas
   function renderHistoryDots(history = []) {
     const statusClasses = {
       FULL: "habit-history-dot--full",
@@ -101,16 +108,13 @@ export default function DashboardScreen() {
 
     return (
       <div className="habit-history">
-        {history.map((d, idx) => {
-          const statusClass = statusClasses[d.status] || "habit-history-dot--none";
-          return (
-            <div
-              key={idx}
-              className={`habit-history-dot ${statusClass}`}
-              title={d.date}
-            />
-          );
-        })}
+        {history.map((d, idx) => (
+          <div
+            key={idx}
+            className={`habit-history-dot ${statusClasses[d.status] || "habit-history-dot--none"}`}
+            title={d.date}
+          />
+        ))}
       </div>
     );
   }
@@ -130,32 +134,44 @@ export default function DashboardScreen() {
         </div>
       </div>
 
-      {/* GRID */}
+      {/* GRID DE HÁBITOS */}
       <div className="habit-grid">
         {habits.map((habit) => (
           <div key={habit._id} className="habit-card">
             
-            {/* CARD HEADER */}
+            {/* CABECERA DE LA TARJETA (NOMBRE + BOTONES) */}
             <div className="habit-card-header">
               <div>
-                <h3 className="habit-name">{habit.name}</h3>                
+                <h3 className="habit-name">{habit.name}</h3>
               </div>
               
-              <button 
-                className="habit-delete-btn"
-                onClick={() => setConfirmHabit(habit)}
-                title="Eliminar hábito"
-              >
-                <Trash2 className="habit-delete-icon" />
-              </button>
+              <div style={{ display: 'flex', gap: '4px' }}>
+                {/* Botón Editar (Lápiz) */}
+                <button 
+                  className="habit-delete-btn"
+                  onClick={() => setEditingHabit(habit)} // Abre el modal nuevo
+                  title="Editar hábito"
+                  style={{ color: '#6366f1' }}
+                >
+                  <Edit2 className="habit-delete-icon" style={{ width: '18px', height: '18px' }} />
+                </button>
+
+                {/* Botón Eliminar (Basura) */}
+                <button 
+                  className="habit-delete-btn"
+                  onClick={() => setConfirmHabit(habit)}
+                  title="Eliminar hábito"
+                >
+                  <Trash2 className="habit-delete-icon" />
+                </button>
+              </div>
             </div>
 
-            {/* INFO */}
+            {/* DETALLES */}
             <p className="habit-detail">
               <strong>Meta:</strong> {habit.dailyGoal} {habit.unit}
             </p>
             
-            {/* RACHAS  */}
             <p className="habit-detail">
               Racha: <strong>{habit.currentStreak}</strong> 🔥 · Mejor: <strong>{habit.bestStreak}</strong> 🏆
             </p>
@@ -163,11 +179,12 @@ export default function DashboardScreen() {
             {/* HISTORIAL */}
             {renderHistoryDots(habit.history)}
 
-            {/* BOTÓN DE ACCIÓN */}
+            {/* BOTÓN REGISTRAR HOY */}
             <button
               disabled={submittingId === habit._id}
               onClick={() => handleAddToday(habit)}
               className="habit-button"
+              
             >
               {submittingId === habit._id ? "Guardando..." : "Registrar hoy"}
             </button>
@@ -175,7 +192,7 @@ export default function DashboardScreen() {
         ))}
       </div>
 
-      {/* panel de eliminación de hábito confirmar */}
+      {/*  CONFIRMACIÓN DE BORRADO  */}
       {confirmHabit && (
         <div className="dashboard-confirm-overlay">
           <div className="dashboard-confirm-dialog">
@@ -203,6 +220,18 @@ export default function DashboardScreen() {
           </div>
         </div>
       )}
+
+      {/* PANEL DE EDITAR */}
+      {editingHabit && (
+        <EditHabitModal 
+            habit={editingHabit} 
+            onClose={() => setEditingHabit(null)} 
+            onUpdateSuccess={() => {
+                window.location.reload();
+            }}
+        />
+      )}
+
     </div>
   );
 }
