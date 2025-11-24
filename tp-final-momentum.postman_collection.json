@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "f6d9ea71-5a2a-48e0-9996-742f39134d46",
+		"name": "tp-final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48720494",
+		"_collection_link": "https://vitofrancolattanzi-422803.postman.co/workspace/PRUEBA~4b49daba-16d5-4652-946f-1fd2ec6319c1/collection/48720494-f6d9ea71-5a2a-48e0-9996-742f39134d46?action=share&source=collection_link&creator=48720494"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"nombre aca\",\r\n  \"email\": \"email\",\r\n  \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL.BACK}}/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0byIsImVtYWlsIjoidml0b2ZyYW5jb2xhdHRhbnppQGdtYWlsLmNvbSIsImlkIjoiNjkxZGUyZGFlMzZiMzM3Zjc4OGRkMTJlIiwiaWF0IjoxNzYzNTk1NTI3LCJleHAiOjE3NjM2ODE5Mjd9.97fj_AMTUWiM62D9agX2TLRb_sRDntqyLHXX6k81Qz0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n  \"email\": \"email\",\r\n  \"password\": \"constraseña\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL.BACK}}/api/auth/login?Content-Type=application/json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear habito",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0b2xvdG8iLCJlbWFpbCI6InZpdG9mcmFuY29sYXR0YW56aUBnbWFpbC5jb20iLCJpZCI6IjY5MjNmZTk4ZDU4NTE1OWE5ODQ2OWI1NSIsImlhdCI6MTc2NDAxMzc1NywiZXhwIjoxNzY0MTAwMTU3fQ.94U0JmKkr3Jm-bpuoQlPiclLsp6zeBnRR5mCJqfaQ68",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"nombre\",\r\n  \"type\": \"\",\r\n  \"unit\": \"\",\r\n  \"dailyGoal\": ,\r\n  \"color\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL.BACK}}/api/habits",
+					"host": [
+						"{{URL.BACK}}"
+					],
+					"path": [
+						"api",
+						"habits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar cards habitos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0b2xvdG8iLCJlbWFpbCI6InZpdG9mcmFuY29sYXR0YW56aUBnbWFpbC5jb20iLCJpZCI6IjY5MjNmZTk4ZDU4NTE1OWE5ODQ2OWI1NSIsImlhdCI6MTc2NDAxMzc1NywiZXhwIjoxNzY0MTAwMTU3fQ.94U0JmKkr3Jm-bpuoQlPiclLsp6zeBnRR5mCJqfaQ68",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL.BACK}}/api/habits",
+					"host": [
+						"{{URL.BACK}}"
+					],
+					"path": [
+						"api",
+						"habits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Hábito",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0b2xvdG8iLCJlbWFpbCI6InZpdG9mcmFuY29sYXR0YW56aUBnbWFpbC5jb20iLCJpZCI6IjY5MjNmZTk4ZDU4NTE1OWE5ODQ2OWI1NSIsImlhdCI6MTc2NDAxMzc1NywiZXhwIjoxNzY0MTAwMTU3fQ.94U0JmKkr3Jm-bpuoQlPiclLsp6zeBnRR5mCJqfaQ68",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"change name\",\r\n  \"dailyGoal\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL.BACK}}/api/habits/:habitId",
+					"host": [
+						"{{URL.BACK}}"
+					],
+					"path": [
+						"api",
+						"habits",
+						":habitId"
+					],
+					"variable": [
+						{
+							"key": "habitId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Hábito",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0b2xvdG8iLCJlbWFpbCI6InZpdG9mcmFuY29sYXR0YW56aUBnbWFpbC5jb20iLCJpZCI6IjY5MjNmZTk4ZDU4NTE1OWE5ODQ2OWI1NSIsImlhdCI6MTc2NDAxMzc1NywiZXhwIjoxNzY0MTAwMTU3fQ.94U0JmKkr3Jm-bpuoQlPiclLsp6zeBnRR5mCJqfaQ68",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL.BACK}}/api/habits/:habitId",
+					"host": [
+						"{{URL.BACK}}"
+					],
+					"path": [
+						"api",
+						"habits",
+						":habitId"
+					],
+					"variable": [
+						{
+							"key": "habitId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar Día",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0b2xvdG8iLCJlbWFpbCI6InZpdG9mcmFuY29sYXR0YW56aUBnbWFpbC5jb20iLCJpZCI6IjY5MjNmZTk4ZDU4NTE1OWE5ODQ2OWI1NSIsImlhdCI6MTc2NDAxMzc1NywiZXhwIjoxNzY0MTAwMTU3fQ.94U0JmKkr3Jm-bpuoQlPiclLsp6zeBnRR5mCJqfaQ68",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"date\": \"2025-11-25\",\r\n  \"value\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL.BACK}}/api/habits/:habitId/entries",
+					"host": [
+						"{{URL.BACK}}"
+					],
+					"path": [
+						"api",
+						"habits",
+						":habitId",
+						"entries"
+					],
+					"variable": [
+						{
+							"key": "habitId",
+							"value": "6923febad585159a98469b61"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver racha",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidml0b2xvdG8iLCJlbWFpbCI6InZpdG9mcmFuY29sYXR0YW56aUBnbWFpbC5jb20iLCJpZCI6IjY5MjNmZTk4ZDU4NTE1OWE5ODQ2OWI1NSIsImlhdCI6MTc2NDAxMzc1NywiZXhwIjoxNzY0MTAwMTU3fQ.94U0JmKkr3Jm-bpuoQlPiclLsp6zeBnRR5mCJqfaQ68",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL.BACK}}/api/entries/:habitId/history?days=7",
+					"host": [
+						"{{URL.BACK}}"
+					],
+					"path": [
+						"api",
+						"entries",
+						":habitId",
+						"history"
+					],
+					"query": [
+						{
+							"key": "days",
+							"value": "7"
+						}
+					],
+					"variable": [
+						{
+							"key": "habitId",
+							"value": "6923febad585159a98469b61"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
